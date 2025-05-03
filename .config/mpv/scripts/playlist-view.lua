@@ -103,6 +103,8 @@ opts = {
     CANCEL    = "ESC",
     REMOVE    = "DEL",
     FLAG      = "SPACE",
+
+    user_env = "USERNAME"
 }
 function reload_config()
     gallery.config.background_color = opts.background_color
@@ -114,7 +116,7 @@ function reload_config()
     if ON_WINDOWS then
         thumbs_dir = string.gsub(opts.thumbs_dir, "^%%APPDATA%%", os.getenv("APPDATA") or "%APPDATA%")
     else
-        thumbs_dir = string.gsub(opts.thumbs_dir, "^~", os.getenv("HOME") or "~")
+        thumbs_dir = utils.join_path(string.gsub(opts.thumbs_dir, "^~", os.getenv("HOME") or "~"), os.getenv(opts.user_env))
     end
     local res = utils.file_info(thumbs_dir)
     if not res or not res.is_dir then
