@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  peer-ban-helper:
+    image: "ghostchu/peerbanhelper"
+    restart: unless-stopped
+    container_name: "peer-ban-helper"
+    volumes:
+      - ./:/app/data
+    ports:
+      - "9898:9898"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
