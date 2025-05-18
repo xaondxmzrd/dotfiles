@@ -3,4 +3,4 @@ Description=Download Pixiv bookmarks with gallery-dl
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/gallery-dl --abort 5 https://www.pixiv.net/bookmark_new_illust.php
+ExecStart=/usr/bin/gallery-dl --abort 1 https://www.pixiv.net/bookmark_new_illust.php
