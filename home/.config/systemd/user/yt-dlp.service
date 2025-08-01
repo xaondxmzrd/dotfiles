@@ -1,0 +1,7 @@
+[Unit]
+Description=BiliBili bookmarks download daemon
+
+[Service]
+WorkingDirectory=%h/videos/#favorites
+Type=oneshot
+ExecStart=/usr/bin/yt-dlp --cookies-from-browser chromium https://space.bilibili.com/531377957/favlist?fid=933742957 --download-archive "downloaded video list.txt"

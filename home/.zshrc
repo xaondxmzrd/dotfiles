@@ -63,5 +63,13 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
+alias la='ll -a'
 alias cat='bat --style=-full'
 alias ls="ls --color --group-directories-first --human-readable --literal --hyperlink -v"
+
+set zle_bracketed_paste
+
+autoload -Uz bracketed-paste-magic url-quote-magic
+
+zle -N bracketed-paste bracketed-paste-magic
+zle -N self-insert url-quote-magic

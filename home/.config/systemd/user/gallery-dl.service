@@ -1,6 +1,6 @@
 [Unit]
-Description=Download Pixiv bookmarks with gallery-dl
+Description=Pixiv artwork download daemon
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/gallery-dl --abort 1 https://www.pixiv.net/bookmark_new_illust.php
+ExecStart=%h/.local/bin/gallery-dl --abort 50 https://www.pixiv.net/bookmark_new_illust.php https://www.pixiv.net/users/107569627/bookmarks/artworks

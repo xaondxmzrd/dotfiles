@@ -1,42 +1,23 @@
 {
-    "extractor": {
+  "extractor": {
+    "pixiv": {
+      "filename": "\fF {id}{num:02} {title}.{extension}",
+      "base-directory": "~/pictures/all",
+      "directory": ["{user['id']} {user['name']}"],
+      "favorite": {
         "base-directory": "~/pictures",
-        "filename": "\fF {id}{num:02} {title}.{extension}",
-        "path-restrict": {
-            "/": "⧸",
-            "。": " ",
-            "？": "?",
-            "！": "!"
-        },
-        "browser": "chrome:linux",
-        "modules": [
-            "pixiv",
-            "oauth"
-        ],
-        "postprocessors": {
-            "name": "ugoira"
-        },
-        "pixiv": {
-            "directory": [
-                "{user['name']}"
-            ],
-            "novel-user": {
-                "base-directory": "~/documents/novel"
-            },
-            "novel-series": {
-                "base-directory": "~/documents/novel"
-            },
-            "novel-bookmark": {
-                "base-directory": "~/documents/novel",
-                "directory": [
-                    "#收藏"
-                ]
-            },
-            "favorite": {
-                "directory": [
-                    "#收藏"
-                ]
-            }
-        }
+        "directory": ["favorites"]
+      },
+      "novel-user": {
+        "base-directory": "~/documents/novel"
+      }
+    },
+    "danbooru": {
+      "filename": "\fF {id} {filename}.{extension}",
+      "base-directory": "~/pictures"
     }
+  },
+  "postprocessors": {
+    "name": "ugoira"
+  }
 }
