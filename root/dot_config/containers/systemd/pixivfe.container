@@ -1,0 +1,12 @@
+[Unit]
+Description=PixivFE service
+
+[Container]
+ContainerName=pixivfe
+Image=registry.gitlab.com/pixivfe/pixivfe
+Environment="PIXIVFE_CONFIGFILE=/config.yaml"
+Volume=%h/.container/pixivfe/config.yaml:/config.yaml:Z
+PublishPort=8282:8282
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=PeerBanHelper service
+
+[Container]
+ContainerName=peerbanhelper
+Image=docker.io/ghostchu/peerbanhelper
+Volume=%h/.container/peerbanhelper/:/app/data:Z,U
+PublishPort=9898:9898
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,59 @@
+# ww, wh: mpv window width, mpv window height (always available)
+# gx, gy: gallery horizontal position, gallery vertical position
+# gw, gh: gallery width, gallery height
+# sw, sh: minimum spacing width, minimum spacing height
+# tw, th: thumbnail width, thumbnail height
+# these strings are interpreted using the lua equivalent of "eval" so math functions and logical conditions can be used
+# if an option references variables, they will be computed in the appropriate order
+# (for example, if gallery_width == 5 * thumbnail_width, thumbnail_size will be computed before gallery_size)
+# in case of cyclical dependencies, the script will abort
+
+thumbs_dir=/tmp/mpv-thumbnails
+
+gallery_size={ ww, wh }
+min_spacing={ 0, 0 }
+thumbnail_size={768, 1080}
+
+max_thumbnails=64
+take_thumbnail_at=20%
+
+load_file_on_toggle_off=yes
+close_on_load_file=yes
+pause_on_start=yes
+resume_on_stop=only-if-did-pause
+start_on_mpv_startup=no
+start_on_file_end=yes
+follow_playlist_position=no
+remember_time_position=no
+
+show_text=no
+
+# colors are defined in hexadecimal in Blue Green Red (BGR) order
+# if multiple colors should be active, they get evenly blended
+# opacity is defined between 00 (opaque) and FF (transparent)
+background_color=000000
+background_opacity=00
+normal_border_color=000000
+normal_border_size=0
+selected_border_color=FFFFFF
+selected_border_size=8
+highlight_active=no
+flagged_border_color=1E81E5
+flagged_border_size=3
+placeholder_color=000000
+
+flagged_file_path={{ .chezmoi.homeDir }}/.cache/mpv_gallery_flagged
+
+mouse_support=yes
+UP=UP
+DOWN=DOWN
+LEFT=LEFT
+RIGHT=RIGHT
+PAGE_UP=PGUP
+PAGE_DOWN=PGDWN
+FIRST=HOME
+LAST=END
+RANDOM=r
+ACCEPT=BS
+CANCEL=ESC
+FLAG=f

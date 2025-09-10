@@ -1,0 +1,11 @@
+--- dot_config/mpv/scripts/playlist-view.lua	2025-09-10 17:15:22.641876884 +0800
++++ dot_config/mpv/scripts/playlist-view_fix.lua	2025-09-10 17:20:47.322959720 +0800
+@@ -114,7 +114,7 @@
+     if ON_WINDOWS then
+         thumbs_dir = string.gsub(opts.thumbs_dir, "^%%APPDATA%%", os.getenv("APPDATA") or "%APPDATA%")
+     else
+-        thumbs_dir = string.gsub(opts.thumbs_dir, "^~", os.getenv("HOME") or "~")
++        thumbs_dir = utils.join_path(string.gsub(opts.thumbs_dir, "^~", os.getenv("HOME") or "~"), os.getenv("USERNAME"))
+     end
+     local res = utils.file_info(thumbs_dir)
+     if not res or not res.is_dir then

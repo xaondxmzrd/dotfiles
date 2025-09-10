@@ -1,0 +1,81 @@
+# 默认不截取字幕
+s screenshot video
+S screenshot
+
+# 变速取整
+[ add speed -0.1
+] add speed 0.1
+
+# 禁用烦人的默认快捷键
+/ ignore
+Del ignore
+g ignore
+WHEEL_UP ignore
+WHEEL_DOWN ignore
+
+# 缩放
+= {image} add video-zoom  0.1
+- {image} add video-zoom -0.1
++ {image} add video-zoom  0.01
+_ {image} add video-zoom -0.01
+BS {image} no-osd set video-zoom 0; no-osd set panscan 0
+
+# 旋转
+r {image} cycle-values video-rotate 270 180 90 0 # rotate counterclockwise (default: add sub-pos -1)
+t {image} cycle-values video-rotate 90 180 270 0 # rotate clock wise (default: add sub-pos +1)
+
+# 扩充/原始大小
+u {image} no-osd cycle-values video-unscaled yes no; no-osd set video-zoom 0; no-osd set panscan 0 # toggle scaling the image to the window.
+
+# 填充大小
+o {image} no-osd set panscan 1; no-osd set video-unscaled no; no-osd set video-zoom 0 # fill black bars
+
+# 取消全屏时不要保留缩放
+f cycle fullscreen; no-osd set video-zoom 0; no-osd set panscan 0
+
+# 拖动
+MBTN_RIGHT {image} script-binding positioning/drag-to-pan
+
+# 翻页
+WHEEL_UP {image} repeatable playlist-prev; no-osd set video-zoom 0; no-osd set panscan 0
+WHEEL_DOWN {image} repeatable playlist-next; no-osd set video-zoom 0; no-osd set panscan 0
+LEFT {image} repeatable playlist-prev; no-osd set video-zoom 0; no-osd set panscan 0
+RIGHT {image} repeatable playlist-next; no-osd set video-zoom 0; no-osd set panscan 0
+
+# 切换重采样器
+b cycle-values scale nearest lanczos
+
+# 画廊模式
+SPACE {image} script-message playlist-view-toggle
+ENTER {image} script-message playlist-view-toggle
+
+# 幻灯片放映
+s {image} cycle-values image-display-duration inf 0.3; set pause no
+
+# 幻灯片速度
+[ {image} add image-display-duration -0.01
+] {image} add image-display-duration  0.01
+{ {image} multiply image-display-duration 0.5
+} {image} multiply image-display-duration 2
+
+# 背景颜色
+c {image} cycle-values background-color 1 0
+
+# 删除文件
+Del {image} run gio trash ${path}; playlist-remove current
+
+e {image} run delete-selected-files.py ${path} {{ .chezmoi.homeDir }}/.cache/mpv_gallery_flagged
+E {image} run delete-selected-files.py --rev ${path} {{ .chezmoi.homeDir }}/.cache/mpv_gallery_flagged
+w {image} run gallery-cli browse ${path}
+m {image} run gallery-cli mark ${path}
+v {image} run gallery-cli unmark ${path}
+n {image} run gallery-cli check ${path}
+
+1 {image} run mv -i ${path} {{ .chezmoi.homeDir }}/pictures/level/1; playlist-remove current
+2 {image} run mv -i ${path} {{ .chezmoi.homeDir }}/pictures/level/2; playlist-remove current
+3 {image} run mv -i ${path} {{ .chezmoi.homeDir }}/pictures/level/3; playlist-remove current
+4 {image} run mv -i ${path} {{ .chezmoi.homeDir }}/pictures/level/4; playlist-remove current
+5 {image} run mv -i ${path} {{ .chezmoi.homeDir }}/pictures/level/5; playlist-remove current
+
+# 退出
+MBTN_MID quit
