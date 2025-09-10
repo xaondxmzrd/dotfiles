@@ -16,7 +16,15 @@ def read_root_dir() -> Path:
         return Path(".")
 
 
-def download_file(url: str, target: Path, overwrite: bool = True):
+ROOT_DIR = read_root_dir()
+MPV_CONFIG_DIR = ROOT_DIR / "dot_config/mpv"
+GITHUB_BASE = "https://raw.githubusercontent.com"
+MPV_REPO = GITHUB_BASE + "/mpv-player/mpv/master"
+MPV_GALLERY_REPO = GITHUB_BASE + "/occivink/mpv-gallery-view/master"
+MPV_IMAGE_CONFIG_REPO = GITHUB_BASE + "/guidocella/mpv-image-config/main"
+
+
+def download(url: str, target: Path, overwrite: bool = True):
     if target.exists() and not overwrite:
         return
 
@@ -26,15 +34,17 @@ def download_file(url: str, target: Path, overwrite: bool = True):
     resp.raise_for_status()
     target.write_bytes(resp.content)
 
+    print(resp.reason, url)
 
-def duplicate_file(original: Path, count: int):
+
+def duplicate(original: Path, count: int):
     base, ext = original.stem, original.suffix
     for i in range(1, count):
         copy = original.with_name(f"{base}{i}{ext}")
         shutil.copy2(original, copy)
 
 
-def apply_patch(target: Path, patch_file: Path):
+def patch(target: Path, patch_file: Path):
     if not target.exists() or not patch_file.exists():
         return
 
@@ -44,31 +54,51 @@ def apply_patch(target: Path, patch_file: Path):
     subprocess.run(["patch", "-p0", target, "-i", patch_file], check=True)
 
 
+def mpv_scripts_autoload_lua():
+    download(MPV_REPO + "/TOOLS/lua/autoload.lua", MPV_CONFIG_DIR / "scripts/autoload.lua")
+
+
+def mpv_script_modules_gallery_lua():
+    path_from_mpv = "script-modules/gallery.lua"
+    download(f"{MPV_GALLERY_REPO}/{path_from_mpv}", MPV_CONFIG_DIR / path_from_mpv)
+
+
+def mpv_scripts_playlist_view_lua():
+    path_from_mpv = "scripts/playlist-view.lua"
+    path_from_woking = MPV_CONFIG_DIR / "scripts/playlist-view.lua"
+
+    download(f"{MPV_GALLERY_REPO}/{path_from_mpv}", path_from_woking)
+    patch(path_from_woking, Path("playlist-view.lua.patch"))
+
+
+def mpv_scripts_gallery_thumbgen_lua():
+    path_from_mpv = "scripts/gallery-thumbgen.lua"
+    path_from_woking = MPV_CONFIG_DIR / path_from_mpv
+
+    download(f"{MPV_GALLERY_REPO}/{path_from_mpv}", MPV_CONFIG_DIR / path_from_mpv)
+    duplicate(path_from_woking, multiprocessing.cpu_count())
+
+
+def mpv_mpv_conf():
+    path_from_mpv = Path("mpv.conf")
+    path_from_woking = MPV_CONFIG_DIR / path_from_mpv
+
+    download(f"{MPV_IMAGE_CONFIG_REPO}/{path_from_mpv}", path_from_woking)
+    patch(path_from_woking, Path("mpv.conf.patch"))
+
+
 def main():
-    github_hostname = "https://raw.githubusercontent.com"
-
-    mpv_repo = github_hostname + "/mpv-player/mpv/master"
-    mpv_gallery_repo = github_hostname + "/occivink/mpv-gallery-view/master"
-
-    root_dir = read_root_dir()
-    mpv_config_dir = root_dir / "dot_config/mpv"
-
-    files_for_download: dict[str, Path] = {
-        mpv_repo + "/TOOLS/lua/autoload.lua": mpv_config_dir / "scripts/autoload.lua",
-        mpv_gallery_repo + "/script-modules/gallery.lua": mpv_config_dir / "script-modules/gallery.lua",
-        mpv_gallery_repo + "/scripts/playlist-view.lua": mpv_config_dir / "scripts/playlist-view.lua",
-        mpv_gallery_repo + "/scripts/gallery-thumbgen.lua": mpv_config_dir / "scripts/gallery-thumbgen.lua",
-    }
-
     with ThreadPoolExecutor() as executor:
-        executor.map(download_file, files_for_download.keys(), files_for_download.values())
-
-    original = mpv_config_dir / "scripts/gallery-thumbgen.lua"
-    if original.exists():
-        num_procs = multiprocessing.cpu_count()
-        duplicate_file(original, num_procs)
-
-    apply_patch(mpv_config_dir / "scripts/playlist-view.lua", Path("playlist-view.lua.patch"))
+        [
+            executor.submit(func)
+            for func in [
+                mpv_scripts_autoload_lua,
+                mpv_script_modules_gallery_lua,
+                mpv_scripts_playlist_view_lua,
+                mpv_scripts_gallery_thumbgen_lua,
+                mpv_mpv_conf,
+            ]
+        ]
 
 
 if __name__ == "__main__":

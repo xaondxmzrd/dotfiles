@@ -6,7 +6,9 @@
   "editor.unicodeHighlight.nonBasicASCII": false,
   "update.showReleaseNotes": false,
   "cmake.showConfigureWithDebuggerNotification": false,
-  "clangd.arguments": ["--header-insertion=never"],
+  "clangd.arguments": [
+    "--header-insertion=never"
+  ],
   "window.autoDetectColorScheme": true,
   "cmake.configureOnOpen": false,
   "editor.formatOnSave": true,
@@ -58,5 +60,9 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "black-formatter.args": [
+    "--line-length",
+    "140"
+  ]
 }
