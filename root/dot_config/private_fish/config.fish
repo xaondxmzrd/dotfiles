@@ -15,4 +15,3 @@ if status is-interactive
 end
 
 fish_add_path -m ~/.local/bin
-mise activate fish | source

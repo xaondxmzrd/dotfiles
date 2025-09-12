@@ -1,0 +1,6 @@
+[Unit]
+Requires=pixivfe.service
+Requires=proxy-to-pixivfe.socket
+
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd localhost:43580

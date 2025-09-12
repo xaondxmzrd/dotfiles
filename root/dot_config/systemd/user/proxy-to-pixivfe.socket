@@ -1,0 +1,9 @@
+[Unit]
+Description=PixivFE Socket
+StopWhenUnneeded=yes
+
+[Socket]
+ListenStream=51834
+
+[Install]
+WantedBy=sockets.target

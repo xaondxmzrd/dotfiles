@@ -1,21 +1,22 @@
 --- root//dot_config//mpv//mpv.conf	2025-09-11 04:42:58.691281551 +0800
 +++ root//dot_config//mpv//mpv.config	2025-09-11 05:05:22.611088427 +0800
-@@ -1,21 +1,30 @@
+@@ -1,21 +1,31 @@
 +profile=high-quality
 +hr-seek
 +fullscreen
 +save-position-on-quit
-+screenshot-directory="~/pictures/animeshot"
++screenshot-directory="~/Pictures/Animeshot"
 +deband
 +sub-auto=fuzzy
 +sub-fix-timing
 +sub-ass-force-margins
 +sub-font-size=46
 +sub-border-size=1.2
-+sub-font="汉仪旗黑-75S"
-+osd-font="汉仪旗黑-55S"
-+hwdec=vaapi
++sub-font="sans-serif"
++sub-bold=yes
 +scale=lanczos
++video-sync=display-resample
++interpolation
 +
  vo=gpu-next # faster with large images
  image-display-duration=inf # don't stop displaying images after 1 second
@@ -50,12 +51,3 @@
  video-recenter # recenter after zooming out
  input-preprocess-wheel=no # pan diagonally with a touchpad
  taskbar-progress=no # don't show a full green progress in Windows' taskbar
-@@ -41,6 +49,8 @@
- [non-image]
- profile-cond=get('user-data/mpv/image') and (not get('current-tracks/video', {image = true}).image or get('current-tracks/audio'))
- input-commands=no-osd del user-data/mpv/image; disable-section image # disable image key bindings
-+video-sync=display-resample
-+interpolation
- 
- # Loop short videos like gifs.
- [loop-short]

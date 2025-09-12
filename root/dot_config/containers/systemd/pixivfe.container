@@ -1,12 +1,15 @@
 [Unit]
 Description=PixivFE service
+Requires=proxy-to-pixiv.service
+
+[Quadlet] 
+DefaultDependencies=false
 
 [Container]
 ContainerName=pixivfe
 Image=registry.gitlab.com/pixivfe/pixivfe
 Environment="PIXIVFE_CONFIGFILE=/config.yaml"
-Volume=%h/.container/pixivfe/config.yaml:/config.yaml:Z
-PublishPort=8282:8282
-
-[Install]
-WantedBy=default.target
+Volume=%h/.containers/pixivfe/config.yaml:/config.yaml
+PublishPort=43580:8282
+AutoUpdate=registry
+Network=ipv4-only

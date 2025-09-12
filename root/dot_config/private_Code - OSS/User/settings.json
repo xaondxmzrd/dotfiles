@@ -1,7 +1,6 @@
 {
   "chat.commandCenter.enabled": false,
   "security.workspace.trust.banner": "never",
-  "editor.fontFamily": "Sarasa Fixed SC",
   "workbench.startupEditor": "none",
   "editor.unicodeHighlight.nonBasicASCII": false,
   "update.showReleaseNotes": false,
@@ -38,31 +37,10 @@
   "editor.fontSize": 16,
   "editor.folding": false,
   "python.analysis.typeCheckingMode": "standard",
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "terminal.integrated.defaultProfile.linux": "fish",
   "files.autoSave": "afterDelay",
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "black-formatter.args": [
     "--line-length",
     "140"
-  ]
+  ],
 }

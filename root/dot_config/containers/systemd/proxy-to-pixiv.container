@@ -1,0 +1,21 @@
+[Unit]
+Description=Proxy to Pixiv
+
+[Service]
+Restart=on-failure
+
+[Quadlet] 
+DefaultDependencies=false
+
+[Container]
+ContainerName=proxy-to-pixiv
+Image=docker.io/library/nginx
+PublishPort=15820:15820
+Volume=%h/.containers/proxy-to-pixiv/nginx.conf:/etc/nginx/nginx.conf:ro
+Volume=%h/.containers/proxy-to-pixiv/ssl_certificate.crt:/etc/ssl/certs/ssl_certificate.crt:ro
+Volume=%h/.containers/proxy-to-pixiv/ssl_certificate.key:/etc/ssl/private/ssl_certificate.key:ro
+Volume=%h/.containers/proxy-to-pixiv/cache/:/var/cache/nginx/
+AutoUpdate=registry
+Network=ipv4-only
+UserNS=keep-id:uid=101,gid=101
+User=0
