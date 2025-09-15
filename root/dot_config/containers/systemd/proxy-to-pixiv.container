@@ -1,5 +1,6 @@
 [Unit]
 Description=Proxy to Pixiv
+BindsTo=pixivfe.service
 
 [Service]
 Restart=on-failure
