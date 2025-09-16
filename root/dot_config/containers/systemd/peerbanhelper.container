@@ -1,6 +1,3 @@
-[Unit]
-Description=PeerBanHelper service
-
 [Service]
 Restart=on-failure
 
@@ -10,9 +7,10 @@ DefaultDependencies=false
 [Container]
 ContainerName=peerbanhelper
 Image=docker.io/ghostchu/peerbanhelper:latest
-Volume=%h/.containers/peerbanhelper/:/app/data
-PublishPort=29483:9898
 AutoUpdate=registry
+
+PublishPort=29483:9898
+Volume=%h/.containers/peerbanhelper/:/app/data
 
 [Install]
 WantedBy=default.target

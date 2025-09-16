@@ -1,0 +1,7 @@
+[Unit]
+Requires=pixivfe-wrapper.socket
+After=pixivfe-wrapper.socket
+BindsTo=pixivfe.service
+
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd --exit-idle-time 15min localhost:43580
