@@ -68,7 +68,7 @@ def mpv_scripts_playlist_view_lua():
     path_from_woking = MPV_CONFIG_DIR / "scripts/playlist-view.lua"
 
     download(f"{MPV_GALLERY_REPO}/{path_from_mpv}", path_from_woking)
-    patch(path_from_woking, Path("playlist-view.lua.patch"))
+    patch(path_from_woking, Path(".playlist-view.lua.patch"))
 
 
 def mpv_scripts_gallery_thumbgen_lua():
@@ -84,7 +84,7 @@ def mpv_mpv_conf():
     path_from_woking = MPV_CONFIG_DIR / path_from_mpv
 
     download(f"{MPV_IMAGE_CONFIG_REPO}/{path_from_mpv}", path_from_woking)
-    patch(path_from_woking, Path("mpv.conf.patch"))
+    patch(path_from_woking, Path(".mpv.conf.patch"))
 
 
 def main():
