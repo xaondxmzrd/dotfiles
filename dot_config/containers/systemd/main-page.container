@@ -15,6 +15,6 @@ AutoUpdate=registry
 
 Environment=NGINX=3;
 Volume=%h/.containers/main-page/nginx.conf:/etc/nginx/nginx.conf
-Volume=%h/.containers/main-page/ssl_certificate.crt:/etc/ssl/certs/ssl_certificate.crt
-Volume=%h/.containers/main-page/ssl_certificate.key:/etc/ssl/private/ssl_certificate.key
+Volume=%h/.containers/main-page/localhost.crt:/etc/ssl/certs/localhost.crt
+Volume=%h/.containers/main-page/localhost.key:/etc/ssl/private/localhost.key
 Volume=%h/.containers/main-page/www/:/var/www/

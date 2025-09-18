@@ -14,8 +14,8 @@ AutoUpdate=registry
 
 PublishPort={{ .data.pixiv_content_proxy.port }}:{{ .data.pixiv_content_proxy.port }}
 Volume=%h/.containers/pixiv-content-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
-Volume=%h/.containers/pixiv-content-proxy/ssl_certificate.crt:/etc/ssl/certs/ssl_certificate.crt:ro
-Volume=%h/.containers/pixiv-content-proxy/ssl_certificate.key:/etc/ssl/private/ssl_certificate.key:ro
+Volume=%h/.containers/pixiv-content-proxy/localhost.crt:/etc/ssl/certs/localhost.crt:ro
+Volume=%h/.containers/pixiv-content-proxy/localhost.key:/etc/ssl/private/localhost.key:ro
 Volume=%h/.containers/pixiv-content-proxy/cache/:/var/cache/nginx/
 User=0
 UserNS=keep-id:uid=101,gid=101
