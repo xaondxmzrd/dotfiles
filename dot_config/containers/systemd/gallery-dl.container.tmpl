@@ -1,0 +1,13 @@
+[Service]
+Type=oneshot
+
+[Quadlet] 
+DefaultDependencies=false
+
+[Container]
+Image=docker.io/mikf123/gallery-dl:latest
+AutoUpdate=registry
+
+Volume=%h/.containers/gallery-dl/config.json:/etc/gallery-dl.conf
+Volume=%h/.containers/gallery-dl/:/srv/
+Exec={{ .data.gallery_dl.args | join " "}}

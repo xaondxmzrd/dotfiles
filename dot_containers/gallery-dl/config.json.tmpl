@@ -1,0 +1,52 @@
+{
+    "extractor": {
+        "base-directory": "/srv",
+        "pixiv": {
+            "filename": "\fF {id}{num:02} {title}.{extension}",
+            "refresh-token": {{ .data.gallery_dl.pixiv.token | quote}},
+            "directory": [
+                "{category}",
+                "{user[id]} {user[name]}"
+            ],
+            "favorite": {
+                "directory": [
+                    "bookmarks",
+                    "{category}",
+                    "{user_bookmark[id]} {user_bookmark[name]}"
+                ]
+            }
+        },
+        "danbooru": {
+            "directory": [
+                "{category}",
+                "{tag_string_artist}"
+            ]
+        },
+        "aryion": {
+            "username": {{ .data.gallery_dl.aryion.username | quote}},
+            "password": {{ .data.gallery_dl.aryion.password | quote}},
+            "gallery": {
+                "directory": [
+                    "{category}",
+                    "{user}"
+                ]
+            },
+            "favorite": {
+                "directory": [
+                    "bookmarks",
+                    "{category}",
+                    "{user}"
+                ]
+            }
+        }
+    },
+    "downloader": {
+        "part-directory": "/tmp/download"
+    },
+    "postprocessors": {
+        "name": "ugoira"
+    },
+    "cache": {
+        "file": "/srv/cache.sqlite3"
+    }
+}

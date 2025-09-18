@@ -1,0 +1,8 @@
+[Unit]
+Description=BiliBili bookmarks download daemon
+
+[Service]
+Type=oneshot
+
+WorkingDirectory=%h/Videos/BiliBili
+ExecStart=/usr/bin/yt-dlp {{ .data.yt_dlp.args | join " "}}
