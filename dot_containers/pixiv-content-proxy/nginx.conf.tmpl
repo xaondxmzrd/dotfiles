@@ -8,9 +8,9 @@ http {
     proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=pximg:10m max_size=10g inactive=7d use_temp_path=off;
 
     server {
-        server_name localhost:15820;
-        listen 15820 ssl;
-        listen [::]:15820 ssl;
+        server_name localhost:{{ .data.pixiv_content_proxy.port }};
+        listen {{ .data.pixiv_content_proxy.port }} ssl;
+        listen [::]:{{ .data.pixiv_content_proxy.port }} ssl;
 
         http2 on;
 

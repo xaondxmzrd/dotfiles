@@ -10,5 +10,5 @@ ContainerName=pixivfe
 Image=registry.gitlab.com/pixivfe/pixivfe
 AutoUpdate=registry
 
-PublishPort=43580:43580
+PublishPort={{ .data.pixivfe.port }}:{{ .data.pixivfe.port }}
 Volume=%h/.containers/pixivfe/config.yaml:/app/config.yaml

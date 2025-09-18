@@ -1,11 +1,11 @@
 basic:
   host: 0.0.0.0
-  port: 43580
+  port: {{ .data.pixivfe.port }}
   token:
     - {{ .data.pixivfe.token }}
 
 contentProxies:
-  imageProxy: https://i.pximg.localhost:8443
+  imageProxy: {{ .data.pixivfe.image_proxy_url }}
 
 cache:
   enabled: true

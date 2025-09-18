@@ -6,8 +6,8 @@ http {
     server {
         server_name localhost;
 
-        listen 8443 ssl;
-        listen [::]:8443 ssl;
+        listen {{ .data.main_page.port }} ssl;
+        listen [::]:{{ .data.main_page.port }} ssl;
         
         http2 on;
 
@@ -22,8 +22,8 @@ http {
     server {
         server_name pbh.localhost;
 
-        listen 8443 ssl;
-        listen [::]:8443 ssl;
+        listen {{ .data.main_page.port }} ssl;
+        listen [::]:{{ .data.main_page.port }} ssl;
 
         http2 on;
 
@@ -31,15 +31,15 @@ http {
         ssl_certificate_key /etc/ssl/private/ssl_certificate.key;
 
         location / {
-            proxy_pass http://host.containers.internal:29483;
+            proxy_pass http://host.containers.internal:{{ .data.peerbanhelper.port }};
         }
     }
 
     server {
         server_name pixivfe.localhost;
 
-        listen 8443 ssl;
-        listen [::]:8443 ssl;
+        listen {{ .data.main_page.port }} ssl;
+        listen [::]:{{ .data.main_page.port }} ssl;
 
         http2 on;
 
@@ -48,15 +48,15 @@ http {
 
 
         location / {
-            proxy_pass http://host.containers.internal:51833;
+            proxy_pass http://host.containers.internal:{{ .data.pixivfe_wrapper.port }};
         }
     }
 
     server {
         server_name i.pximg.localhost;
 
-        listen 8443 ssl;
-        listen [::]:8443 ssl;
+        listen {{ .data.main_page.port }} ssl;
+        listen [::]:{{ .data.main_page.port }} ssl;
 
         http2 on;
 
@@ -64,7 +64,7 @@ http {
         ssl_certificate_key /etc/ssl/private/ssl_certificate.key;
 
         location / {
-            proxy_pass https://host.containers.internal:15820;
+            proxy_pass https://host.containers.internal:{{ .data.pixiv_content_proxy.port }};
         }
     }
 }

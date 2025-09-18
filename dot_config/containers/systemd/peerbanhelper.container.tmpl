@@ -9,7 +9,7 @@ ContainerName=peerbanhelper
 Image=docker.io/ghostchu/peerbanhelper:latest
 AutoUpdate=registry
 
-PublishPort=29483:9898
+PublishPort={{ .data.peerbanhelper.port }}:9898
 Volume=%h/.containers/peerbanhelper/:/app/data
 
 [Install]

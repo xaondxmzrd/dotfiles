@@ -12,7 +12,7 @@ ContainerName=pixiv-content-proxy
 Image=docker.io/library/nginx
 AutoUpdate=registry
 
-PublishPort=15820:15820
+PublishPort={{ .data.pixiv_content_proxy.port }}:{{ .data.pixiv_content_proxy.port }}
 Volume=%h/.containers/pixiv-content-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
 Volume=%h/.containers/pixiv-content-proxy/ssl_certificate.crt:/etc/ssl/certs/ssl_certificate.crt:ro
 Volume=%h/.containers/pixiv-content-proxy/ssl_certificate.key:/etc/ssl/private/ssl_certificate.key:ro
