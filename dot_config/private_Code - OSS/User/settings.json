@@ -44,4 +44,8 @@
     "140"
   ],
   "telemetry.telemetryLevel": "off",
+  "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+  "editor.unicodeHighlight.allowedLocales": {
+    "zh-hans": true
+  },
 }

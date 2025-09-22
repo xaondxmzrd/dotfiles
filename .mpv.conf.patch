@@ -12,7 +12,7 @@
 +sub-ass-force-margins
 +sub-font-size=46
 +sub-border-size=1.2
-+sub-font="sans-serif"
++sub-font="汉仪旗黑-75S"
 +sub-bold=yes
 +scale=lanczos
 +video-sync=display-resample

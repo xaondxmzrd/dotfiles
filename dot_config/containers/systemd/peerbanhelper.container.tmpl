@@ -1,12 +1,9 @@
 [Service]
 Restart=on-failure
 
-[Quadlet] 
-DefaultDependencies=false
-
 [Container]
 ContainerName=peerbanhelper
-Image=docker.io/ghostchu/peerbanhelper:latest
+Image=docker.io/ghostchu/peerbanhelper
 AutoUpdate=registry
 
 PublishPort={{ .data.peerbanhelper.port }}:9898
