@@ -4,4 +4,4 @@ After=pixivfe-wrapper.socket
 BindsTo=pixivfe.service
 
 [Service]
-ExecStart=/usr/lib/systemd/systemd-socket-proxyd --exit-idle-time 15min localhost:43580
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd --exit-idle-time 30min localhost:43580
